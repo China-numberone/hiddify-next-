@@ -1,12 +1,18 @@
 #!/bin/bash
 
-sudo apt update && sudo apt install -y python3 python3-pip git nginx
-git clone https://github.com/hiddify/hiddify-next.git
-cd hiddify-next
-pip3 install -r requirements.txt
-# 配置环境变量或 config 文件
-# 设置反向代理 Nginx
-# 启动 Flask 服务： flask run --host=0.0.0.0 --port=5000
+# 更新系统，安装基础环境
+sudo apt update && sudo apt install -y python3 python3-pip git nginx curl
+
+# 使用官方一键安装脚本部署 Hiddify 服务端
+bash -c "$(curl -fsSL https://i.hiddify.com/release)"
+
+# 显示 nginx 状态，确认是否启动
+systemctl status nginx --no-pager -n 10
+
+# 显示 Hiddify 面板服务状态（如果有）
+systemctl status hiddify-panel --no-pager -n 10 || echo "hiddify-panel 服务未找到"
+
+echo "安装完成，请根据提示访问面板地址。"
 
 # 退出到上级目录
 cd ..
