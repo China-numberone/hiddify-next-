@@ -1,20 +1,12 @@
 #!/bin/bash
 
-# 更新系统并安装依赖
 sudo apt update && sudo apt install -y python3 python3-pip git nginx
-
-# 克隆项目（如果已存在则更新）
-if [ ! -d hiddify-next ]; then
-  git clone https://github.com/hiddify/hiddify-next.git
-else
-  cd hiddify-next
-  git pull
-  cd ..
-fi
-
-# 进入项目目录并安装 Python 依赖
+git clone https://github.com/hiddify/hiddify-next.git
 cd hiddify-next
 pip3 install -r requirements.txt
+# 配置环境变量或 config 文件
+# 设置反向代理 Nginx
+# 启动 Flask 服务： flask run --host=0.0.0.0 --port=5000
 
 # 退出到上级目录
 cd ..
